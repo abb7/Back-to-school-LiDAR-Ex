@@ -240,6 +240,7 @@ namespace HKY
                 if (drawObject) Gizmos.DrawWireCube((Vector3)obj.position + transform.position, new Vector3(100, 100, 0));
             }
 
+            //Draw the point where the position exict 
             if (drawProcessedObject)
             {
                 //draw processed object
