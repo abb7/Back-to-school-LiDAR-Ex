@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class VirtualClicks : StandaloneInputModule
 {
-
+    public CSGTGameManager cSGTGameManager;
 
     public void ClickAt(float x, float y)
     {
@@ -16,5 +16,11 @@ public class VirtualClicks : StandaloneInputModule
         }, out bool b, out bool bb);
 
         ProcessTouchPress(pointerData, true, true);
+        ShootAt(pointerData);
+    }
+
+    public void ShootAt(PointerEventData pointerData)
+    {
+        cSGTGameManager.Shoot(pointerData.position);
     }
 }
