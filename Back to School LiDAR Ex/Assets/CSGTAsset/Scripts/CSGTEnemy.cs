@@ -83,8 +83,8 @@ public class CSGTEnemy : MonoBehaviour {
 
     public void HitDeathLine()
     {
-        if (!isFriendly)
-            CSGTGameManager.instance.GameOver();
+		if (!isFriendly) { }
+            //CSGTGameManager.instance.GameOver();
     }
 
 	private void FixedUpdate()
