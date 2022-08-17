@@ -1,20 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Rigidbody))]
 public class CSGTObjectMover : MonoBehaviour {
 
     public float objectSpeed = -3.0f;
     public float xForce;
     public float maxForce = 1.5f;
 
-    private Rigidbody2D rigBody2D;
+    private Rigidbody rigBody2D;
 
     private float suspendDelta = 0;
 
     void Start()
     {
-        rigBody2D = GetComponent<Rigidbody2D>();
+        rigBody2D = GetComponent<Rigidbody>();
     }
 
     void Update()
