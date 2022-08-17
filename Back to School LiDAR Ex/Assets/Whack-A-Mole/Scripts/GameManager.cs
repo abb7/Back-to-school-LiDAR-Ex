@@ -38,9 +38,9 @@ public class GameManager : MonoBehaviour {
 	
 	void Update () 
 	{
-		if (this.state == State.START) 
+		if (this.state == State.START ) 
 		{
-			if (Input.GetMouseButtonDown (0)) 
+			/*if (Input.GetMouseButtonDown (0)) 
 			{
 				this.state = State.PLAY;
 
@@ -51,7 +51,8 @@ public class GameManager : MonoBehaviour {
 				this.moleManager.StartGenerate ();
 
 				this.audio.Play ();
-			}
+			}*/
+			
 		}
 		else if (this.state == State.PLAY) 
 		{	
@@ -87,5 +88,18 @@ public class GameManager : MonoBehaviour {
 
 			this.remainingTIme.text = "";
 		}
+	}
+
+	public void OnStartButtonClicker()
+    {
+		this.state = State.PLAY;
+
+		// hide start label
+		this.anim.SetTrigger("StartTrigger");
+
+		// start to generate moles
+		this.moleManager.StartGenerate();
+
+		this.audio.Play();
 	}
 }

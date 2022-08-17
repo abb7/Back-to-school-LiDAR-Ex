@@ -58,4 +58,25 @@ public class HummerController : MonoBehaviour {
 			}
 		}
 	}
+
+	public void HitAtPoint(Vector3 point)
+    {
+		Ray ray = Camera.main.ScreenPointToRay(point);
+		RaycastHit hit;
+
+		if (Physics.Raycast(ray, out hit, 100))
+		{
+			GameObject mole = hit.collider.gameObject;
+
+			bool isHit = mole.GetComponent<MoleController>().Hit();
+
+			// if hit the mole, show hummer and effect
+			if (isHit)
+			{
+				StartCoroutine(Hit(mole.transform.position));
+
+				ScoreManager.score += 10;
+			}
+		}
+	}
 }
