@@ -15,6 +15,7 @@ public class HummerController : MonoBehaviour {
 
 	IEnumerator Hit(Vector3 target)
 	{
+		//yield return new WaitForSeconds(0.1f);
 		// Hummer Down		
 		transform.position = new Vector3(target.x, 0, target.z);
 
@@ -25,12 +26,12 @@ public class HummerController : MonoBehaviour {
 
 		this.audio.PlayOneShot (this.hitSE);
 
-		yield return new WaitForSeconds (0.1f);
+		yield return new WaitForSeconds (0.3f);
 
 		// Hummer Up
-		for (int i = 0; i < 6; i++) 
+		for (int i = 0; i < 12; i++) 
 		{
-			transform.Translate (0, 0, 1.0f);
+			transform.Translate (0, 0, 0.5f);
 			yield return null;
 		}
 	}
