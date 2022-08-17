@@ -95,6 +95,6 @@ public class CSGTEnemy : MonoBehaviour {
 	private void SetLayerOrder()
 	{
 		float ordNum = transform.localPosition.y * 10;
-		spriteRen.sortingOrder = -Mathf.FloorToInt (ordNum);
+		//spriteRen.sortingOrder = -Mathf.FloorToInt (ordNum);
 	}
 }

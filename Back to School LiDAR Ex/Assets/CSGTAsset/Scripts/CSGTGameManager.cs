@@ -163,7 +163,7 @@ public class CSGTGameManager : MonoBehaviour {
         spawnObject = spawnGameObjects[Random.Range(0, spawnGameObjects.Length)];
         GameObject newEnemy = (GameObject)(Instantiate(spawnObject, spawnObjectPos, spawnObject.transform.rotation
             ));
-        newEnemy.transform.localScale = new Vector3(300f, 300f, 0f);
+        newEnemy.transform.localScale = new Vector3(300f, 300f, 300f);
 
         newEnemy.transform.SetParent(spawnLine);
         newEnemy.transform.SetAsFirstSibling();
