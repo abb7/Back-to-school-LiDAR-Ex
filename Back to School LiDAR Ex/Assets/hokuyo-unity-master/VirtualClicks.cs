@@ -21,6 +21,6 @@ public class VirtualClicks : StandaloneInputModule
 
     public void ShootAt(PointerEventData pointerData)
     {
-        cSGTGameManager.Shoot(pointerData.position);
+        cSGTGameManager.Shoot(new Vector3 (pointerData.position.x, pointerData.position.y, 0.0f));
     }
 }

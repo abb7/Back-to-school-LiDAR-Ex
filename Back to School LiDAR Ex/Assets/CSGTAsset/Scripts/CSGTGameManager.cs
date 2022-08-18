@@ -145,15 +145,23 @@ public class CSGTGameManager : MonoBehaviour {
 
     public void Shoot(Vector3 aimPosition)
     {
-        RaycastHit2D raycastHit2D = Physics2D.Raycast(aimPosition, Vector2.zero);
-        if (raycastHit2D.collider != null)
+        //RaycastHit2D raycastHit2D = Physics.Raycast(aimPosition, Vector2.zero);
+        RaycastHit hit;
+        Debug.DrawRay(aimPosition, Vector3.up, Color.red,10,false);
+
+        if (Physics.Raycast(aimPosition, Vector3.up, out hit, 5f))
         {
-            if (raycastHit2D.collider.tag == "Enemy")
+            if (hit.collider != null)
             {
-                raycastHit2D.collider.gameObject.GetComponent<CSGTEnemy>().hit();
+                if (hit.collider.tag == "Enemy")
+                {
+                    hit.collider.gameObject.GetComponent<CSGTEnemy>().hit();
+                }
+
             }
-           
         }
+        
+
     }
 
     void SpawnNewObject()

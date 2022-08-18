@@ -37,11 +37,11 @@ public class CSGTEnemy : MonoBehaviour {
         lives--;
 
         if (lives > 0) {
-			PlaySound (soundHit [Random.Range (0, soundHit.Length)]);
+			//PlaySound (soundHit [Random.Range (0, soundHit.Length)]);
 			animator.Play ("Hit");
 			mover.Suspend (1.0f);
 		} else {
-			PlaySound(soundDead[UnityEngine.Random.Range(0, soundDead.Length)]);
+			//PlaySound(soundDead[UnityEngine.Random.Range(0, soundDead.Length)]);
 			isDead = true;
 		}
 
