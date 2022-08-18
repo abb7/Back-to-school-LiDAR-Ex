@@ -11,7 +11,8 @@ public class CSGTTrigger : MonoBehaviour {
         if (other.tag == TargetTag)
         {
             //Debug.Log("Enemy noticed");
-            other.SendMessage(TargetMessage, transform);
+            other.SendMessage(TargetMessage, transform,SendMessageOptions.RequireReceiver);
+            Destroy(other.gameObject);
 			//other.GetComponent<CSGTEnemy> ().HitDeathLine();
         }
     }

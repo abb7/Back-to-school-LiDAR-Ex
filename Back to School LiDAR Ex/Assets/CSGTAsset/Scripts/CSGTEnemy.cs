@@ -65,7 +65,7 @@ public class CSGTEnemy : MonoBehaviour {
             bloodSplash.GetComponent<SpriteRenderer>().color = effectColor;
             CSGTSplashPool.instance.AddToPool(bloodSplash);
             if (isFriendly) CSGTGameManager.instance.GameOver();
-			spriteRen.enabled = false;
+			//spriteRen.enabled = false;
             boxCollider.enabled = false;
 			mover.Suspend(2.0f);
 			Destroy(gameObject, 2.0f);
