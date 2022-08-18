@@ -60,15 +60,15 @@ public class CSGTEnemy : MonoBehaviour {
 				}
             }
 
-            GameObject deadEnemy = (GameObject)Instantiate(deadBody[UnityEngine.Random.Range(0, deadBody.Length)], transform.position, Quaternion.identity);
+            //GameObject deadEnemy = (GameObject)Instantiate(deadBody[UnityEngine.Random.Range(0, deadBody.Length)], transform.position, Quaternion.identity);
             GameObject bloodSplash = (GameObject)Instantiate(bloodEffect[UnityEngine.Random.Range(0, bloodEffect.Length)], transform.position, Quaternion.identity);
             bloodSplash.GetComponent<SpriteRenderer>().color = effectColor;
             CSGTSplashPool.instance.AddToPool(bloodSplash);
             if (isFriendly) CSGTGameManager.instance.GameOver();
 			//spriteRen.enabled = false;
             boxCollider.enabled = false;
-			mover.Suspend(2.0f);
-			Destroy(gameObject, 2.0f);
+			mover.Suspend(1.0f);
+			Destroy(gameObject, 1.0f);
         }
     }
 
