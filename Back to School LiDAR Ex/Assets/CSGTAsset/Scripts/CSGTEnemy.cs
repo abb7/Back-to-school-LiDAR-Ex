@@ -21,7 +21,7 @@ public class CSGTEnemy : MonoBehaviour {
     private CSGTObjectMover mover;
 	private SpriteRenderer spriteRen;
 	private AudioSource audSource;
-	private CircleCollider2D cirCollider2D;
+	private BoxCollider boxCollider;
 
     void Awake()
     {
@@ -29,7 +29,7 @@ public class CSGTEnemy : MonoBehaviour {
         mover = GetComponent<CSGTObjectMover>();
 		spriteRen = GetComponent<SpriteRenderer>();
 		audSource = GetComponent<AudioSource>();
-		cirCollider2D = GetComponent<CircleCollider2D> ();
+        boxCollider = GetComponent<BoxCollider> ();
     }
 
     public void hit()
@@ -66,7 +66,7 @@ public class CSGTEnemy : MonoBehaviour {
             CSGTSplashPool.instance.AddToPool(bloodSplash);
             if (isFriendly) CSGTGameManager.instance.GameOver();
 			spriteRen.enabled = false;
-			cirCollider2D.enabled = false;
+            boxCollider.enabled = false;
 			mover.Suspend(2.0f);
 			Destroy(gameObject, 2.0f);
         }

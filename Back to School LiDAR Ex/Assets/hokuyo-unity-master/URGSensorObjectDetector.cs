@@ -412,7 +412,7 @@ namespace HKY
             //Virtual click
             for (int i = 0; i < rawObjectList.Count; i++)
             {
-                Debug.Log("x= " + (rawObjectList[i].position.x + transform.position.x) + ", y= " + (rawObjectList[i].position.y + transform.position.y));
+                //Debug.Log("x= " + (rawObjectList[i].position.x + transform.position.x) + ", y= " + (rawObjectList[i].position.y + transform.position.y));
                  virtualClicks.ClickAt(rawObjectList[i].position.x + transform.position.x, rawObjectList[i].position.y + transform.position.y);
             }
         }
