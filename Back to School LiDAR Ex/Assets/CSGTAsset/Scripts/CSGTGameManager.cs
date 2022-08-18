@@ -85,9 +85,9 @@ public class CSGTGameManager : MonoBehaviour {
     {
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
 
-        LoadGameData();
-        ShowGameMenu();
-
+        //LoadGameData();
+        //ShowGameMenu();
+        GameStart();
         //GoogleAdsManager.Instance.InterstialDoneCallback = InterstialDone;
     }
 
