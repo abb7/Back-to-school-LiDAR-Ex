@@ -22,7 +22,7 @@ public class CSGTObjectMover : MonoBehaviour {
         if (suspendDelta > 0)
         {
             suspendDelta -= Time.deltaTime;
-            rigBody2D.velocity = Vector2.zero;
+            rigBody2D.velocity = Vector3.zero;
             return;
         }
 
@@ -39,7 +39,7 @@ public class CSGTObjectMover : MonoBehaviour {
         if (Mathf.Abs(xForce) < 0.01f)
             xForce = 0;
 
-        rigBody2D.velocity = new Vector2(xForce, objectSpeed);
+        rigBody2D.velocity = new Vector3(xForce, objectSpeed, 0f);
     }
 
     public void Suspend(float time)
