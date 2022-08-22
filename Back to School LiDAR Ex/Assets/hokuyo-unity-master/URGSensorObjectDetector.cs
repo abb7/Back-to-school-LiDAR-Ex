@@ -15,6 +15,7 @@ namespace HKY
         [SerializeField] string ip_address = "192.168.0.10";
         [SerializeField] int port_number = 10940;
         UrgDeviceEthernet urg;
+        
         public int sensorScanSteps { get; private set; }
         public bool open { get; private set; }
         bool gd_loop = false;
@@ -32,6 +33,7 @@ namespace HKY
             {
                 Rect rect = new Rect(0, 0, detectRectWidth, detectRectHeight);
                 rect.x -= (detectRectWidth / 2);
+                //rect.center = new Vector2(detectRectWidth / 2, detectRectHeight);
                 return rect;
             }
         }
@@ -90,7 +92,7 @@ namespace HKY
 
         public enum DistanceCroppingMethod
         {
-            RECT, RADIUS
+            RECT, RADIUS, FLIPRECT
         }
 
         public ProcessedObject GetObjectByGuid(Guid guid)
@@ -168,6 +170,49 @@ namespace HKY
                                 r = 0;
                             }
 
+                            distanceConstrainList[i] = (long)r; 
+                        }
+
+
+                    }
+
+                    break;
+
+                case DistanceCroppingMethod.FLIPRECT:
+                    float keyAngleFR = Mathf.Atan(-detectRectHeight / (detectRectWidth / 2f));
+
+                    for (int i = 0; i < steps; i++)
+                    {
+                        if (directions[i].y <= 0)
+                        {
+                            distanceConstrainList[i] = 0;
+                        }
+                        else
+                        {
+                            float a = Vector3.Angle(directions[i], Vector3.right) * Mathf.Deg2Rad;
+                            float tanAngle = Mathf.Tan(a);
+                            float pn = tanAngle / Mathf.Abs(tanAngle);
+
+                            float r = 0;
+                            if (a < keyAngleFR || a > Mathf.PI - keyAngleFR)
+                            {
+                                float x = pn * detectRectWidth / 2;
+                                float y = x * Mathf.Tan(a);
+                                r = y / Mathf.Sin(a);
+                            }
+                            else if (a >= keyAngleFR && a <= Mathf.PI - keyAngleFR)
+                            {
+                                float angle2 = Mathf.PI / 2 - a;
+                                float y = detectRectHeight;
+                                float x = y * Mathf.Tan(angle2);
+                                r = x / Mathf.Sin(angle2);
+                            }
+
+                            if (r < 0 || float.IsNaN(r))
+                            {
+                                r = 0;
+                            }
+
                             distanceConstrainList[i] = (long)r;
                         }
 
@@ -208,7 +253,10 @@ namespace HKY
                     Gizmos.DrawWireSphere(new Vector3(0, 0, 0) + transform.position, maxDetectionDist);
                     break;
                 case DistanceCroppingMethod.RECT:
-                    Gizmos.DrawWireCube(new Vector3(0, detectRectHeight / 2, 0) + transform.position, new Vector3(detectAreaRect.width, detectAreaRect.height, 1));
+                    Gizmos.DrawWireCube(new Vector3(0,  detectRectHeight/2 , 0) + transform.position, new Vector3(detectAreaRect.width, detectAreaRect.height, 1));
+                    break;
+                case DistanceCroppingMethod.FLIPRECT:
+                    Gizmos.DrawWireCube(new Vector3(0, -detectRectHeight / 2, 0) + transform.position, new Vector3(detectAreaRect.width, detectAreaRect.height, 1));
                     break;
             }
 
@@ -218,7 +266,7 @@ namespace HKY
                 for (int i = 0; i < croppedDistances.Count; i++)
                 {
                     Vector3 dir = directions[i];
-                    long dist = croppedDistances[i];
+                    long dist = croppedDistances[i] ; //added detectRectHeight
                     Debug.DrawLine(Vector3.zero + transform.position, (dist * dir) + transform.position, distanceColor);
                 }
             }
@@ -329,6 +377,7 @@ namespace HKY
             urg.StartTCP(ip_address, port_number);
 
             StartMeasureDistance();
+            
         }
 
         private void StartMeasureDistance()
@@ -413,7 +462,7 @@ namespace HKY
             for (int i = 0; i < rawObjectList.Count; i++)
             {
                 //Debug.Log("x= " + (rawObjectList[i].position.x + transform.position.x) + ", y= " + (rawObjectList[i].position.y + transform.position.y));
-                 virtualClicks.ClickAt(rawObjectList[i].position.x + transform.position.x, rawObjectList[i].position.y + transform.position.y);
+                 virtualClicks.ClickAt(detectRectWidth-(rawObjectList[i].position.x + transform.position.x), detectRectHeight-((rawObjectList[i].position.y ) + transform.position.y));
             }
         }
 
