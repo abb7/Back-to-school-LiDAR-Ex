@@ -256,6 +256,7 @@ namespace HKY
                     float size = 30;// pObj.size;
                     Gizmos.DrawCube(pObj.position, new Vector3(size, size, 1));
                     UnityEditor.Handles.Label(pObj.position, pObj.position.ToString());
+                    Gizmos.DrawCube(new Vector3(detectRectWidth - pObj.position.x +transform.position.x, detectRectHeight - pObj.position.y+transform.position.y , pObj.position.z), new Vector3(120, 120, 0));
                 }
             }
 
@@ -412,8 +413,9 @@ namespace HKY
             //Virtual click
             for (int i = 0; i < rawObjectList.Count; i++)
             {
-                Debug.Log("x= " + (rawObjectList[i].position.x + transform.position.x) + ", y= " + (rawObjectList[i].position.y + transform.position.y));
                  virtualClicks.ClickAt(detectRectWidth-( rawObjectList[i].position.x + transform.position.x),detectRectHeight-( rawObjectList[i].position.y + transform.position.y));
+
+
             }
         }
 
