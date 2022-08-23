@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "com.unity.burst": {
-      "version": "1.6.6",
+      "version": "1.6.5",
       "depth": 1,
       "source": "registry",
       "dependencies": {
@@ -93,7 +93,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.services.core": {
-      "version": "1.4.2",
+      "version": "1.4.0",
       "depth": 1,
       "source": "registry",
       "dependencies": {
@@ -153,13 +153,11 @@
         "com.unity.modules.imgui": "1.0.0"
       }
     },
-    "jp.keijiro.klak.spout": {
-      "version": "2.0.3",
+    "jp.keijiro.klak.syphon": {
+      "version": "0.0.4",
       "depth": 0,
       "source": "registry",
-      "dependencies": {
-        "com.unity.modules.screencapture": "1.0.0"
-      },
+      "dependencies": {},
       "url": "https://registry.npmjs.com"
     },
     "com.unity.modules.ai": {
