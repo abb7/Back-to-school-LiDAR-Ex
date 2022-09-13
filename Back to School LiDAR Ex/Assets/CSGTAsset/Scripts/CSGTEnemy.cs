@@ -46,6 +46,7 @@ public class CSGTEnemy : MonoBehaviour {
 		}
 
         GameObject splashBlood = (GameObject)Instantiate(splashEffect[UnityEngine.Random.Range(0, splashEffect.Length)], transform.position, Quaternion.identity);
+        splashBlood.transform.localScale = new Vector3(300, 300, 300);
         splashBlood.GetComponent<ParticleSystem>().startColor = effectColor;
         Destroy(splashBlood, 1);
 
