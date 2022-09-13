@@ -21,6 +21,8 @@ public class CSGTGameManager : MonoBehaviour {
 
     [Header("Spawn")]
     public RectTransform spawnLine;
+    public RectTransform spawnLineRight;
+    public RectTransform spawnLineLeft;
 
     [Header("Spawn Time Management")]
     public float startSpawnSpeed = 2.0f;
@@ -32,6 +34,7 @@ public class CSGTGameManager : MonoBehaviour {
     public GameObject[] spawnGameObjects;
     private GameObject spawnObject;
     public float[] spawnObjectsXPos = new float[6] { -2.25f, -1.5f, -0.75f, 0.75f, 1.5f, 2.25f };
+    public float[] spawnObjectsYPos;
 
     [Header("Sounds")]
     public AudioClip buttonClickSound;
@@ -158,15 +161,68 @@ public class CSGTGameManager : MonoBehaviour {
 
     void SpawnNewObject()
     {
+        int i = Random.Range(0, 3);
+        switch(i)
+        {
+            case 0:
+                SpawnNewFromTop();
+                //SpawnNewFromTop();
+                break;
+            case 1:
+                SpawnNewFromRight();
+                break;
+            case 2:
+                SpawnNewFromLeft();
+                //SpawnNewFromLeft();
+                break;
+
+        }
+
+
+    }
+
+    //These random spwaner locations
+    void SpawnNewFromTop()
+    {
         float spawnObjectXPos = spawnObjectsXPos[Random.Range(0, spawnObjectsXPos.Length)];
         Vector3 spawnObjectPos = new Vector3(spawnObjectXPos, spawnLine.position.y, 0);
         spawnObject = spawnGameObjects[Random.Range(0, spawnGameObjects.Length)];
-        GameObject newEnemy = (GameObject)(Instantiate(spawnObject, spawnObjectPos, Quaternion.identity
-            ));
+
+        GameObject newEnemy = (GameObject)(Instantiate(spawnObject, spawnObjectPos, Quaternion.identity));
         newEnemy.transform.localScale = new Vector3(300f, 300f, 0f);
 
         newEnemy.transform.SetParent(spawnLine);
         newEnemy.transform.SetAsFirstSibling();
+        newEnemy.GetComponent<CSGTObjectMover>().SetDirection(CSGTObjectMover.direction.downward);
+    }
+    void SpawnNewFromRight()
+    {
+        float spawnObjectYPos = spawnObjectsYPos[Random.Range(0, spawnObjectsYPos.Length)];
+        Vector3 spawnObjectPos = new Vector3( spawnLineRight.position.x, spawnObjectYPos, 0);
+        spawnObject = spawnGameObjects[Random.Range(0, spawnGameObjects.Length)];
+
+        GameObject newEnemy = (GameObject)(Instantiate(spawnObject, spawnObjectPos, Quaternion.identity));
+        newEnemy.transform.localScale = new Vector3(300f, 300f, 0f);
+
+        newEnemy.transform.SetParent(spawnLine);
+        newEnemy.transform.SetAsFirstSibling();
+        newEnemy.GetComponent<CSGTObjectMover>().SetDirection(CSGTObjectMover.direction.right);
+
+        //change translate to the move to the left
+        //newEnemy.GetComponent<>
+    }
+    void SpawnNewFromLeft()
+    {
+        float spawnObjectYPos = spawnObjectsYPos[Random.Range(0, spawnObjectsYPos.Length)];
+        Vector3 spawnObjectPos = new Vector3(spawnLineLeft.position.x, spawnObjectYPos, 0);
+        spawnObject = spawnGameObjects[Random.Range(0, spawnGameObjects.Length)];
+
+        GameObject newEnemy = (GameObject)(Instantiate(spawnObject, spawnObjectPos, Quaternion.identity));
+        newEnemy.transform.localScale = new Vector3(300f, 300f, 0f);
+
+        newEnemy.transform.SetParent(spawnLine);
+        newEnemy.transform.SetAsFirstSibling();
+        newEnemy.GetComponent<CSGTObjectMover>().SetDirection(CSGTObjectMover.direction.left);
 
     }
 

@@ -11,6 +11,13 @@ public class CSGTObjectMover : MonoBehaviour {
     private Rigidbody2D rigBody2D;
 
     private float suspendDelta = 0;
+    public enum direction
+    {
+        downward,
+        left,
+        right
+    }
+    public direction dir;
 
     void Start()
     {
@@ -25,12 +32,11 @@ public class CSGTObjectMover : MonoBehaviour {
             rigBody2D.velocity = Vector2.zero;
             return;
         }
-
         xForce = Mathf.Clamp(xForce, -maxForce, maxForce);
 
         if (xForce == 0)
-             xForce = -rigBody2D.transform.localPosition.x / (rigBody2D.transform.parent as RectTransform).rect.xMax; 
-        
+            xForce = -rigBody2D.transform.localPosition.x / (rigBody2D.transform.parent as RectTransform).rect.xMax;
+
         if (xForce > 0)
             xForce -= Time.deltaTime;
         else
@@ -38,8 +44,27 @@ public class CSGTObjectMover : MonoBehaviour {
 
         if (Mathf.Abs(xForce) < 0.01f)
             xForce = 0;
+        if (dir == direction.downward)
+        {
+            rigBody2D.velocity = new Vector2(xForce, objectSpeed);
 
-        rigBody2D.velocity = new Vector2(xForce, objectSpeed);
+        }
+        else if(dir == direction.left)
+        {
+            rigBody2D.velocity = new Vector2(-objectSpeed, xForce);
+
+        }
+        else if (dir == direction.right)
+        {
+            rigBody2D.velocity = new Vector2(objectSpeed, xForce);
+
+        }
+
+    }
+
+    public void SetDirection(direction d)
+    {
+        dir = d;
     }
 
     public void Suspend(float time)
