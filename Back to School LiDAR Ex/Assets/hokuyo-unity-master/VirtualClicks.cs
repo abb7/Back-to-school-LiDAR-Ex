@@ -22,5 +22,13 @@ public class VirtualClicks : StandaloneInputModule
     public void ShootAt(PointerEventData pointerData)
     {
         cSGTGameManager.Shoot(pointerData.position);
+        print("sensor location= " + pointerData.position );
+    }
+
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0)){
+            print("mouse location=" + Input.mousePosition);
+        }
     }
 }

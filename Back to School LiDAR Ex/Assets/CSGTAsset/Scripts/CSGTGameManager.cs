@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
@@ -119,7 +119,7 @@ public class CSGTGameManager : MonoBehaviour {
     {
         if (!Application.isMobilePlatform)
         {
-            if (Input.GetButtonDown("Fire1"))
+            if (Input.GetButtonDown("Fire1") )
             {
                 aimMousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 Shoot(aimMousePosition);
@@ -189,7 +189,7 @@ public class CSGTGameManager : MonoBehaviour {
         spawnObject = spawnGameObjects[Random.Range(0, spawnGameObjects.Length)];
 
         GameObject newEnemy = (GameObject)(Instantiate(spawnObject, spawnObjectPos, Quaternion.identity));
-        newEnemy.transform.localScale = new Vector3(300f, 300f, 0f);
+        newEnemy.transform.localScale = new Vector3(50f, 50f, 0f);
 
         newEnemy.transform.SetParent(spawnLine);
         newEnemy.transform.SetAsFirstSibling();
@@ -202,7 +202,7 @@ public class CSGTGameManager : MonoBehaviour {
         spawnObject = spawnGameObjects[Random.Range(0, spawnGameObjects.Length)];
 
         GameObject newEnemy = (GameObject)(Instantiate(spawnObject, spawnObjectPos, Quaternion.identity));
-        newEnemy.transform.localScale = new Vector3(300f, 300f, 0f);
+        newEnemy.transform.localScale = new Vector3(50f, 50f, 0f);
 
         newEnemy.transform.SetParent(spawnLine);
         newEnemy.transform.SetAsFirstSibling();
@@ -218,7 +218,7 @@ public class CSGTGameManager : MonoBehaviour {
         spawnObject = spawnGameObjects[Random.Range(0, spawnGameObjects.Length)];
 
         GameObject newEnemy = (GameObject)(Instantiate(spawnObject, spawnObjectPos, Quaternion.identity));
-        newEnemy.transform.localScale = new Vector3(300f, 300f, 0f);
+        newEnemy.transform.localScale = new Vector3(50f, 50f, 0f);
 
         newEnemy.transform.SetParent(spawnLine);
         newEnemy.transform.SetAsFirstSibling();
